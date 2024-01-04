@@ -2,7 +2,7 @@ require "./lib/string.rb"
 require "./lib/player.rb"
 
 class Board
-  attr_accessor :board_obj
+  attr_accessor :board_obj, :playerw
 
   def initialize(name1, name2)
     @playerw = Player.new(name1, true)
@@ -38,6 +38,7 @@ class Board
   end
 
   def update_board
+    @board = Array.new(8) { Array.new(8, "   ")}
     @playerw.pieces.each do |piece|
       @board[piece.coord[0]][piece.coord[1]] = piece.icon
     end
@@ -47,6 +48,7 @@ class Board
   end
 
   def update_board_obj
+    @board_obj = Array.new(8) { Array.new(8, nil)}
     @playerw.pieces.each do |piece|
       @board_obj[piece.coord[0]][piece.coord[1]] = piece
     end

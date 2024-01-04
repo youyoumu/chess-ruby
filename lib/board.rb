@@ -42,4 +42,31 @@ class Board
       @board[piece.coord[0]][piece.coord[1]] = piece.icon
     end
   end
+
+  def translate(str_input)
+    row_start = 8 - str_input[1].to_i
+    column_start = str_input[0].downcase.ord - 97
+    row_target = 8 - str_input[3].to_i
+    column_target = str_input[2].downcase.ord - 97
+
+    start = [row_start, column_start]
+    target = [row_target, column_target]
+
+    [start,target]
+  end
+
+  def input_valid?(str_input)
+    valid_int = [1, 2, 3, 4, 5, 6, 7, 8]
+    valid_letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    unless (
+      str_input.length == 4 &&
+      valid_int.include?(str_input[1].to_i) &&
+      valid_int.include?(str_input[3].to_i) &&
+      valid_letter.include?(str_input[0].downcase) &&
+      valid_letter.include?(str_input[2].downcase)
+    )
+      return false
+    end
+    true
+  end
 end

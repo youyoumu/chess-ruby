@@ -2,7 +2,7 @@ require "./lib/string.rb"
 require "./lib/player.rb"
 
 class Board
-  attr_accessor :board_obj, :playerw
+  attr_accessor :board_obj, :playerw, :playerb
 
   def initialize(name1, name2)
     @playerw = Player.new(name1, true)

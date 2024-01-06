@@ -6,7 +6,7 @@ require "./lib/rook.rb"
 require "./lib/pawn.rb"
 
 class Player
-  attr_accessor :pieces, :name, :color, :pawn1
+  attr_accessor :pieces, :name, :color, :pawn1, :pawn7
 
   def initialize(name, color)
     @name = name

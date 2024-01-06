@@ -1,5 +1,5 @@
 class Queen
-  attr_accessor :coord, :color, :icon
+  attr_accessor :coord, :color, :icon,  :is_captured
   def initialize(coord, color)
     @coord = coord
     @color = color

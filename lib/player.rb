@@ -55,4 +55,10 @@ class Player
     @pawn4, @pawn5, @pawn6, @pawn7, @pawn8]
 
   end
+
+  def update_pieces
+    @pieces = @pieces.reject do |piece|
+      piece.is_captured
+    end
+  end
 end

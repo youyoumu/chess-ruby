@@ -1,3 +1,5 @@
+require './lib/chessman.rb'
+
 class Bishop
   include Chessman
   attr_accessor :coord, :color, :icon, :is_captured, :name

@@ -1,4 +1,5 @@
 class Knight
+  include Chessman
   attr_accessor :coord, :color, :icon, :is_captured, :name
   def initialize(coord, color)
     @coord = coord

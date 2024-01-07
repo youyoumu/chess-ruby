@@ -15,6 +15,16 @@ class Rook
     @coord = coord
   end
 
+  def capture(coord, board_obj)
+    board_obj[coord[0]][coord[1]].captured
+    @coord = coord
+  end
+
+  def take_turn(coord, board_obj)
+    arr_move = generate_move(board_obj)
+    arr_move.include?(coord) ? move(coord) : capture(coord, board_obj)
+  end
+
   def generate_move(board_obj)
     generate_move_up(board_obj) + generate_move_down(board_obj) +
     generate_move_left(board_obj) + generate_move_right(board_obj)

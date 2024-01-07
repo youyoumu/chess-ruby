@@ -2,13 +2,14 @@ require './lib/chessman.rb'
 
 class Pawn
   include Chessman
-  attr_accessor :coord, :color, :icon, :is_captured
+  attr_accessor :coord, :color, :icon, :is_captured, :name
   def initialize(coord, color)
     @coord = coord
     @color = color
     @icon = color ? " ♙ " : " ♟︎ "
     @is_captured = false
     @first_move_available = true
+    @name = 'Pawn'
   end
 
   def move(coord)
@@ -20,6 +21,11 @@ class Pawn
     @first_move_available = false
     board_obj[coord[0]][coord[1]].captured
     @coord = coord
+  end
+
+  def take_turn(coord, board_obj)
+    arr_move = generate_move(board_obj)
+    arr_move.include?(coord) ? move(coord) : capture(coord, board_obj)
   end
 
   def coord_valid?(coord, board_obj)

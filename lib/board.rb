@@ -37,6 +37,86 @@ class Board
     puts "    A  B  C  D  E  F  G  H "
   end
 
+  def play
+    draw_board
+    loop do
+      update
+      take_turnw
+      update
+      draw_board
+      take_turnb
+      update
+      draw_board
+    end
+  end
+
+  def take_turnw
+    input = nil
+    coords = nil
+    chessman = nil
+    loop do
+      loop do
+        puts "#{@playerw.name}'s turn:"
+        input = gets.chomp
+        break if input_valid?(input)
+        puts "Wrong format! Try again:"
+      end
+      coords = translate(input)
+      chessman = find_chessman(coords[0])
+      break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && chessman.color
+      if chessman.nil?
+        puts "You selected empty square! Try again:"
+      elsif !chessman.color
+        puts "That chessman is not your's! Try again:"
+      else
+        puts "That #{chessman.name} can't get to that location! Try again:"
+      end
+    end
+    chessman.take_turn(coords[1], @board_obj)
+  end
+
+  def take_turnb
+    input = nil
+    coords = nil
+    chessman = nil
+    loop do
+      loop do
+        puts "#{@playerb.name}'s turn:"
+        input = gets.chomp
+        break if input_valid?(input)
+        puts "Wrong format! Try again:"
+      end
+      coords = translate(input)
+      chessman = find_chessman(coords[0])
+      break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && !chessman.color
+      if chessman.nil?
+        puts "You selected empty square! Try again:"
+      elsif chessman.color
+        puts "That chessman is not your's! Try again:"
+      else
+        puts "That #{chessman.name} can't get to that location! Try again:"
+      end
+    end
+    chessman.take_turn(coords[1], @board_obj)
+  end
+
+  def find_chessman(coord)
+    chessman = nil
+    @playerw.pieces.each do |piece|
+      return chessman = piece if piece.coord == coord
+    end
+    @playerb.pieces.each do |piece|
+      return chessman = piece if piece.coord == coord
+    end
+    chessman
+  end
+
+  def update
+    @playerw.update_pieces
+    @playerb.update_pieces
+    update_board_obj
+  end
+
   def update_board
     @board = Array.new(8) { Array.new(8, "   ")}
     @playerw.pieces.each do |piece|

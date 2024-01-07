@@ -28,14 +28,6 @@ class Pawn
     arr_move.include?(coord) ? move(coord) : capture(coord, board_obj)
   end
 
-  def coord_valid?(coord, board_obj)
-    arr_move = generate_move(board_obj)
-    arr_capture = generate_capture(board_obj)
-    arr = arr_move + arr_capture
-    return true if arr.include?(coord)
-    false
-  end
-
   def generate_move(board_obj)
     arr = []
     if @first_move_available

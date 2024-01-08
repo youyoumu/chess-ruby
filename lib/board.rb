@@ -43,11 +43,18 @@ class Board
       update
       take_turnw
       update
+      announch_check
       draw_board
       take_turnb
       update
+      announch_check
       draw_board
     end
+  end
+
+  def announch_check
+    puts "Warning! #{@playerb.name}'s King is under attack!" if @playerw.is_attacking?(@playerb.king.coord, @board_obj)
+    puts "Warning! #{@playera.name}'s King is under attack!" if @playerb.is_attacking?(@playerb.king.coord, @board_obj)
   end
 
   def take_turnw

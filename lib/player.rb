@@ -6,7 +6,7 @@ require "./lib/rook.rb"
 require "./lib/pawn.rb"
 
 class Player
-  attr_accessor :pieces, :name, :color, :pawn1, :pawn7
+  attr_accessor :pieces, :name, :color, :king
 
   def initialize(name, color)
     @name = name
@@ -64,7 +64,7 @@ class Player
 
   def is_attacking?(king_coord, board_obj)
     @pieces.each do |piece|
-      arr = piece.generate_capture
+      arr = piece.generate_capture(board_obj)
       return true if arr.include?(king_coord)
     end
     false

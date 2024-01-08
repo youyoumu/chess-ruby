@@ -43,7 +43,6 @@ class Knight
     arr << coord if in_bound?(coord) && board_obj[coord[0]][coord[1]].nil?
     coord = [@coord[0] + 1, @coord[1] + 2]
     arr << coord if in_bound?(coord) && board_obj[coord[0]][coord[1]].nil?
-    p arr
     arr
   end
 
@@ -84,7 +83,6 @@ class Knight
       coord = [@coord[0] + 1, @coord[1] + 2]
       arr << coord if in_bound?(coord) && !board_obj[coord[0]][coord[1]].nil? && board_obj[coord[0]][coord[1]].color
     end
-    p arr
     arr
   end
 end

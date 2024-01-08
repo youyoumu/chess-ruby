@@ -61,4 +61,12 @@ class Player
       piece.is_captured
     end
   end
+
+  def is_attacking?(king_coord, board_obj)
+    @pieces.each do |piece|
+      arr = piece.generate_capture
+      return true if arr.include?(king_coord)
+    end
+    false
+  end
 end

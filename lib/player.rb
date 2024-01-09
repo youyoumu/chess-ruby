@@ -69,4 +69,67 @@ class Player
     end
     false
   end
+
+  def clone_pieces
+    pieces = []
+    @pieces.each do |piece|
+      pieces << piece.dup
+    end
+    @pieces = pieces
+  end
+
+  def checkmate?(playerw, playerb, board_obj)
+    check_arr = []
+    @pieces.each do |piece|
+      coord = piece.coord
+      targets = []
+      targets = piece.generate_move(board_obj) + piece.generate_capture(board_obj)
+
+      targets.each do |target|
+        playerw_dupe = playerw.dup
+        playerb_dupe = playerb.dup
+        playerw_dupe.clone_pieces
+        playerb_dupe.clone_pieces
+
+        board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
+
+        chessman = nil
+        playerw_dupe.pieces.each do |piece_dupe|
+          chessman = piece_dupe if piece_dupe.coord == coord
+        end
+        playerb_dupe.pieces.each do |piece_dupe|
+          chessman = piece_dupe if piece_dupe.coord == coord
+        end
+
+        p chessman
+        p chessman.coord
+        chessman.take_turn(target, board_obj_dupe)
+        playerw_dupe.update_pieces
+        playerb_dupe.update_pieces
+
+        p chessman.coord
+        p playerb_dupe.king.coord
+
+        board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
+        if @color
+          check_arr << playerb_dupe.is_attacking?(playerw_dupe.king.coord, board_obj_dupe)
+        else
+          check_arr << playerw_dupe.is_attacking?(playerb_dupe.king.coord, board_obj_dupe)
+        end
+      end
+    end
+    p check_arr
+    return !check_arr.include?(false)
+  end
+
+  def generate_board_obj(playerw, playerb)
+    board_obj = Array.new(8) { Array.new(8, nil)}
+    playerw.pieces.each do |piece|
+      board_obj[piece.coord[0]][piece.coord[1]] = piece
+    end
+    playerb.pieces.each do |piece|
+      board_obj[piece.coord[0]][piece.coord[1]] = piece
+    end
+    board_obj
+  end
 end

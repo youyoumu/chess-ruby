@@ -38,8 +38,7 @@ class Rook
   def generate_move_up(board_obj)
     arr = []
     move_coord = @coord
-    board_obj[move_coord[0]][move_coord[1]] = nil
-    while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+    while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
       move_coord = [move_coord[0] - 1, move_coord[1]]
       arr << move_coord if in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
     end
@@ -49,8 +48,7 @@ class Rook
   def generate_move_down(board_obj)
     arr = []
     move_coord = @coord
-    board_obj[move_coord[0]][move_coord[1]] = nil
-    while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+    while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
       move_coord = [move_coord[0] + 1, move_coord[1]]
       arr << move_coord if in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
     end
@@ -60,8 +58,7 @@ class Rook
   def generate_move_left(board_obj)
     arr = []
     move_coord = @coord
-    board_obj[move_coord[0]][move_coord[1]] = nil
-    while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+    while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
       move_coord = [move_coord[0], move_coord[1] - 1]
       arr << move_coord if in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
     end
@@ -71,8 +68,7 @@ class Rook
   def generate_move_right(board_obj)
     arr = []
     move_coord = @coord
-    board_obj[move_coord[0]][move_coord[1]] = nil
-    while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+    while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
       move_coord = [move_coord[0], move_coord[1] + 1]
       arr << move_coord if in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
     end
@@ -82,14 +78,13 @@ class Rook
   def generate_capture_up(board_obj)
     arr = []
     move_coord = @coord
-    board_obj[move_coord[0]][move_coord[1]] = nil
     if @color
-      while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
         move_coord = [move_coord[0] - 1, move_coord[1]]
         arr << move_coord if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && !board_obj[move_coord[0]][move_coord[1]].color
       end
     else
-      while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
         move_coord = [move_coord[0] - 1, move_coord[1]]
         arr << move_coord if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && board_obj[move_coord[0]][move_coord[1]].color
       end
@@ -100,14 +95,13 @@ class Rook
   def generate_capture_down(board_obj)
     arr = []
     move_coord = @coord
-    board_obj[move_coord[0]][move_coord[1]] = nil
     if @color
-      while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
         move_coord = [move_coord[0] + 1, move_coord[1]]
         arr << move_coord if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && !board_obj[move_coord[0]][move_coord[1]].color
       end
     else
-      while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
         move_coord = [move_coord[0] + 1, move_coord[1]]
         arr << move_coord if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && board_obj[move_coord[0]][move_coord[1]].color
       end
@@ -118,14 +112,13 @@ class Rook
   def generate_capture_left(board_obj)
     arr = []
     move_coord = @coord
-    board_obj[move_coord[0]][move_coord[1]] = nil
     if @color
-      while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
         move_coord = [move_coord[0], move_coord[1] - 1]
         arr << move_coord if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && !board_obj[move_coord[0]][move_coord[1]].color
       end
     else
-      while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
         move_coord = [move_coord[0], move_coord[1] - 1]
         arr << move_coord if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && board_obj[move_coord[0]][move_coord[1]].color
       end
@@ -136,14 +129,13 @@ class Rook
   def generate_capture_right(board_obj)
     arr = []
     move_coord = @coord
-    board_obj[move_coord[0]][move_coord[1]] = nil
     if @color
-      while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
         move_coord = [move_coord[0], move_coord[1] + 1]
         arr << move_coord if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && !board_obj[move_coord[0]][move_coord[1]].color
       end
     else
-      while in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
+      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
         move_coord = [move_coord[0], move_coord[1] + 1]
         arr << move_coord if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && board_obj[move_coord[0]][move_coord[1]].color
       end

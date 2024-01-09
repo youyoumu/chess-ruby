@@ -16,4 +16,8 @@ module Chessman
     return true if arr.include?(coord)
     false
   end
+
+  def inspect
+    "#{@name}"
+  end
 end

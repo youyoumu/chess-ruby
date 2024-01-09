@@ -43,12 +43,14 @@ class Board
       update
       take_turnw
       update
-      announch_check
       draw_board
+      announch_check
+      puts playerb.checkmate?(@playerw, @playerb, @board_obj)
       take_turnb
       update
-      announch_check
       draw_board
+      announch_check
+      puts playerw.checkmate?(@playerw, @playerb, @board_obj)
     end
   end
 

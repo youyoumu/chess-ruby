@@ -44,13 +44,19 @@ class Board
       take_turnw
       update
       draw_board
+      if playerb.checkmate?(@playerw, @playerb, @board_obj)
+        puts "Check mate! #{@playerw.name} wins!"
+        return
+      end
       announch_check
-      puts playerb.checkmate?(@playerw, @playerb, @board_obj)
       take_turnb
       update
       draw_board
+      if playerw.checkmate?(@playerw, @playerb, @board_obj)
+        puts "Check mate! #{@playerb.name} wins!"
+        return
+      end
       announch_check
-      puts playerw.checkmate?(@playerw, @playerb, @board_obj)
     end
   end
 

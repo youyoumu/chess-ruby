@@ -6,7 +6,7 @@ require "./lib/rook.rb"
 require "./lib/pawn.rb"
 
 class Player
-  attr_accessor :pieces, :name, :color, :king
+  attr_accessor :pieces, :name, :color
 
   def initialize(name, color)
     @name = name
@@ -56,6 +56,10 @@ class Player
 
   end
 
+  def king
+    @king
+  end
+
   def update_pieces
     @pieces = @pieces.reject do |piece|
       piece.is_captured
@@ -70,14 +74,6 @@ class Player
     false
   end
 
-  def clone_pieces
-    pieces = []
-    @pieces.each do |piece|
-      pieces << piece.dup
-    end
-    @pieces = pieces
-  end
-
   def checkmate?(playerw, playerb, board_obj)
     check_arr = []
     @pieces.each do |piece|
@@ -86,10 +82,8 @@ class Player
       targets = piece.generate_move(board_obj) + piece.generate_capture(board_obj)
 
       targets.each do |target|
-        playerw_dupe = playerw.dup
-        playerb_dupe = playerb.dup
-        playerw_dupe.clone_pieces
-        playerb_dupe.clone_pieces
+        playerw_dupe = Marshal.load(Marshal.dump(playerw))
+        playerb_dupe = Marshal.load(Marshal.dump(playerb))
 
         board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
 
@@ -101,14 +95,9 @@ class Player
           chessman = piece_dupe if piece_dupe.coord == coord
         end
 
-        p chessman
-        p chessman.coord
         chessman.take_turn(target, board_obj_dupe)
         playerw_dupe.update_pieces
         playerb_dupe.update_pieces
-
-        p chessman.coord
-        p playerb_dupe.king.coord
 
         board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
         if @color
@@ -118,7 +107,6 @@ class Player
         end
       end
     end
-    p check_arr
     return !check_arr.include?(false)
   end
 

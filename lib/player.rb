@@ -63,12 +63,73 @@ class Player
     end
   end
 
+  def promote_pawn
+    if @color
+      @pawn1 = get_new_class(@pawn1.coord) if !@pawn1.is_captured && @pawn1.coord[0] == 0 && @pawn1.name == 'Pawn'
+      @pawn2 = get_new_class(@pawn2.coord) if !@pawn2.is_captured && @pawn2.coord[0] == 0 && @pawn2.name == 'Pawn'
+      @pawn3 = get_new_class(@pawn3.coord) if !@pawn3.is_captured && @pawn3.coord[0] == 0 && @pawn3.name == 'Pawn'
+      @pawn4 = get_new_class(@pawn4.coord) if !@pawn4.is_captured && @pawn4.coord[0] == 0 && @pawn4.name == 'Pawn'
+      @pawn5 = get_new_class(@pawn5.coord) if !@pawn5.is_captured && @pawn5.coord[0] == 0 && @pawn5.name == 'Pawn'
+      @pawn6 = get_new_class(@pawn6.coord) if !@pawn6.is_captured && @pawn6.coord[0] == 0 && @pawn6.name == 'Pawn'
+      @pawn7 = get_new_class(@pawn7.coord) if !@pawn7.is_captured && @pawn7.coord[0] == 0 && @pawn7.name == 'Pawn'
+      @pawn8 = get_new_class(@pawn8.coord) if !@pawn8.is_captured && @pawn8.coord[0] == 0 && @pawn8.name == 'Pawn'
+    else
+      @pawn1 = get_new_class(@pawn1.coord) if !@pawn1.is_captured && @pawn1.coord[0] == 7 && @pawn1.name == 'Pawn'
+      @pawn2 = get_new_class(@pawn2.coord) if !@pawn2.is_captured && @pawn2.coord[0] == 7 && @pawn2.name == 'Pawn'
+      @pawn3 = get_new_class(@pawn3.coord) if !@pawn3.is_captured && @pawn3.coord[0] == 7 && @pawn3.name == 'Pawn'
+      @pawn4 = get_new_class(@pawn4.coord) if !@pawn4.is_captured && @pawn4.coord[0] == 7 && @pawn4.name == 'Pawn'
+      @pawn5 = get_new_class(@pawn5.coord) if !@pawn5.is_captured && @pawn5.coord[0] == 7 && @pawn5.name == 'Pawn'
+      @pawn6 = get_new_class(@pawn6.coord) if !@pawn6.is_captured && @pawn6.coord[0] == 7 && @pawn6.name == 'Pawn'
+      @pawn7 = get_new_class(@pawn7.coord) if !@pawn7.is_captured && @pawn7.coord[0] == 7 && @pawn7.name == 'Pawn'
+      @pawn8 = get_new_class(@pawn8.coord) if !@pawn8.is_captured && @pawn8.coord[0] == 7 && @pawn8.name == 'Pawn'
+    end
+    update_pawns
+  end
+
+  def update_pawns
+    @pawns = @pawns.reject do |piece|
+      piece.name != 'Pawn'
+    end
+  end
+
+  def get_new_class(coord)
+    puts 'Promote the Pawn! Please select one of these class: [Queen, Bishop, Knight, Rook]'
+    input = nil
+    loop do
+      input = gets.chomp.downcase
+      break if input_valid?(input)
+      puts 'Invalid input! Try again:'
+    end
+    case input
+    when 'queen'
+      Queen.new(coord, @color)
+    when 'bishop'
+      Bishop.new(coord, @color)
+    when 'knight'
+      Knight.new(coord, @color)
+    when 'rook'
+      Rook.new(coord, @color)
+    end
+  end
+
+  def input_valid?(input)
+    valid_input = ['queen', 'bishop', 'knight', 'rook']
+    return true if valid_input.include?(input)
+    false
+  end
+
   def king
     @king
   end
 
   def update_pieces
+    @pieces =
+    [@king, @queen, @bishop1, @bishop2, @knight1, @knight2, @rook1, @rook2, @pawn1, @pawn2, @pawn2, @pawn3,
+    @pawn4, @pawn5, @pawn6, @pawn7, @pawn8]
     @pieces = @pieces.reject do |piece|
+      piece.is_captured
+    end
+    @pawns = @pawns.reject do |piece|
       piece.is_captured
     end
   end

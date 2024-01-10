@@ -62,7 +62,7 @@ class Board
 
   def announch_check
     puts "Warning! #{@playerb.name}'s King is under attack!" if @playerw.is_attacking?(@playerb.king.coord, @board_obj)
-    puts "Warning! #{@playera.name}'s King is under attack!" if @playerb.is_attacking?(@playerb.king.coord, @board_obj)
+    puts "Warning! #{@playerw.name}'s King is under attack!" if @playerb.is_attacking?(@playerw.king.coord, @board_obj)
   end
 
   def take_turnw
@@ -89,6 +89,7 @@ class Board
     end
     @playerw.cancel_en_passant_vulnerability
     chessman.take_turn(coords[1], @board_obj)
+    @playerw.promote_pawn
   end
 
   def take_turnb
@@ -115,6 +116,7 @@ class Board
     end
     @playerb.cancel_en_passant_vulnerability
     chessman.take_turn(coords[1], @board_obj)
+    @playerb.promote_pawn
   end
 
   def find_chessman(coord)

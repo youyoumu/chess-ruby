@@ -65,25 +65,73 @@ class Player
     end
   end
 
-  def promote_pawn
+  def promote_pawn(promote_name = nil)
     if @color
-      @pawn1 = get_new_class(@pawn1.coord) if !@pawn1.is_captured && @pawn1.coord[0].zero? && @pawn1.name == 'Pawn'
-      @pawn2 = get_new_class(@pawn2.coord) if !@pawn2.is_captured && @pawn2.coord[0].zero? && @pawn2.name == 'Pawn'
-      @pawn3 = get_new_class(@pawn3.coord) if !@pawn3.is_captured && @pawn3.coord[0].zero? && @pawn3.name == 'Pawn'
-      @pawn4 = get_new_class(@pawn4.coord) if !@pawn4.is_captured && @pawn4.coord[0].zero? && @pawn4.name == 'Pawn'
-      @pawn5 = get_new_class(@pawn5.coord) if !@pawn5.is_captured && @pawn5.coord[0].zero? && @pawn5.name == 'Pawn'
-      @pawn6 = get_new_class(@pawn6.coord) if !@pawn6.is_captured && @pawn6.coord[0].zero? && @pawn6.name == 'Pawn'
-      @pawn7 = get_new_class(@pawn7.coord) if !@pawn7.is_captured && @pawn7.coord[0].zero? && @pawn7.name == 'Pawn'
-      @pawn8 = get_new_class(@pawn8.coord) if !@pawn8.is_captured && @pawn8.coord[0].zero? && @pawn8.name == 'Pawn'
+      if !@pawn1.is_captured && @pawn1.coord[0].zero? && @pawn1.name == 'Pawn'
+        @pawn1 = get_new_class(@pawn1.coord,
+                               promote_name)
+      end
+      if !@pawn2.is_captured && @pawn2.coord[0].zero? && @pawn2.name == 'Pawn'
+        @pawn2 = get_new_class(@pawn2.coord,
+                               promote_name)
+      end
+      if !@pawn3.is_captured && @pawn3.coord[0].zero? && @pawn3.name == 'Pawn'
+        @pawn3 = get_new_class(@pawn3.coord,
+                               promote_name)
+      end
+      if !@pawn4.is_captured && @pawn4.coord[0].zero? && @pawn4.name == 'Pawn'
+        @pawn4 = get_new_class(@pawn4.coord,
+                               promote_name)
+      end
+      if !@pawn5.is_captured && @pawn5.coord[0].zero? && @pawn5.name == 'Pawn'
+        @pawn5 = get_new_class(@pawn5.coord,
+                               promote_name)
+      end
+      if !@pawn6.is_captured && @pawn6.coord[0].zero? && @pawn6.name == 'Pawn'
+        @pawn6 = get_new_class(@pawn6.coord,
+                               promote_name)
+      end
+      if !@pawn7.is_captured && @pawn7.coord[0].zero? && @pawn7.name == 'Pawn'
+        @pawn7 = get_new_class(@pawn7.coord,
+                               promote_name)
+      end
+      if !@pawn8.is_captured && @pawn8.coord[0].zero? && @pawn8.name == 'Pawn'
+        @pawn8 = get_new_class(@pawn8.coord,
+                               promote_name)
+      end
     else
-      @pawn1 = get_new_class(@pawn1.coord) if !@pawn1.is_captured && @pawn1.coord[0] == 7 && @pawn1.name == 'Pawn'
-      @pawn2 = get_new_class(@pawn2.coord) if !@pawn2.is_captured && @pawn2.coord[0] == 7 && @pawn2.name == 'Pawn'
-      @pawn3 = get_new_class(@pawn3.coord) if !@pawn3.is_captured && @pawn3.coord[0] == 7 && @pawn3.name == 'Pawn'
-      @pawn4 = get_new_class(@pawn4.coord) if !@pawn4.is_captured && @pawn4.coord[0] == 7 && @pawn4.name == 'Pawn'
-      @pawn5 = get_new_class(@pawn5.coord) if !@pawn5.is_captured && @pawn5.coord[0] == 7 && @pawn5.name == 'Pawn'
-      @pawn6 = get_new_class(@pawn6.coord) if !@pawn6.is_captured && @pawn6.coord[0] == 7 && @pawn6.name == 'Pawn'
-      @pawn7 = get_new_class(@pawn7.coord) if !@pawn7.is_captured && @pawn7.coord[0] == 7 && @pawn7.name == 'Pawn'
-      @pawn8 = get_new_class(@pawn8.coord) if !@pawn8.is_captured && @pawn8.coord[0] == 7 && @pawn8.name == 'Pawn'
+      if !@pawn1.is_captured && @pawn1.coord[0] == 7 && @pawn1.name == 'Pawn'
+        @pawn1 = get_new_class(@pawn1.coord,
+                               promote_name)
+      end
+      if !@pawn2.is_captured && @pawn2.coord[0] == 7 && @pawn2.name == 'Pawn'
+        @pawn2 = get_new_class(@pawn2.coord,
+                               promote_name)
+      end
+      if !@pawn3.is_captured && @pawn3.coord[0] == 7 && @pawn3.name == 'Pawn'
+        @pawn3 = get_new_class(@pawn3.coord,
+                               promote_name)
+      end
+      if !@pawn4.is_captured && @pawn4.coord[0] == 7 && @pawn4.name == 'Pawn'
+        @pawn4 = get_new_class(@pawn4.coord,
+                               promote_name)
+      end
+      if !@pawn5.is_captured && @pawn5.coord[0] == 7 && @pawn5.name == 'Pawn'
+        @pawn5 = get_new_class(@pawn5.coord,
+                               promote_name)
+      end
+      if !@pawn6.is_captured && @pawn6.coord[0] == 7 && @pawn6.name == 'Pawn'
+        @pawn6 = get_new_class(@pawn6.coord,
+                               promote_name)
+      end
+      if !@pawn7.is_captured && @pawn7.coord[0] == 7 && @pawn7.name == 'Pawn'
+        @pawn7 = get_new_class(@pawn7.coord,
+                               promote_name)
+      end
+      if !@pawn8.is_captured && @pawn8.coord[0] == 7 && @pawn8.name == 'Pawn'
+        @pawn8 = get_new_class(@pawn8.coord,
+                               promote_name)
+      end
     end
     update_pawns
   end
@@ -94,14 +142,16 @@ class Player
     end
   end
 
-  def get_new_class(coord)
-    puts 'Promote the Pawn! Please select one of these class: [Queen, Bishop, Knight, Rook]'
-    input = nil
-    loop do
-      input = gets.chomp.downcase
-      break if input_valid?(input)
+  def get_new_class(coord, promote_name)
+    input = promote_name
+    if input.nil?
+      puts 'Promote the Pawn! Please select one of these class: [Queen, Bishop, Knight, Rook]'
+      loop do
+        input = gets.chomp.downcase
+        break if input_valid?(input)
 
-      puts 'Invalid input! Try again:'
+        puts 'Invalid input! Try again:'
+      end
     end
     case input
     when 'queen'
@@ -143,23 +193,37 @@ class Player
   end
 
   def suicide?(playerw, playerb, _board_obj, coords)
-    playerw_dupe = Marshal.load(Marshal.dump(playerw))
-    playerb_dupe = Marshal.load(Marshal.dump(playerb))
-    board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
+    arr_check = []
+    %w[queen bishop knight rook].each do |promote_name|
+      playerw_dupe = Marshal.load(Marshal.dump(playerw))
+      playerb_dupe = Marshal.load(Marshal.dump(playerb))
+      board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
 
-    chessman = find_chessman(playerw_dupe, playerb_dupe, coords[0])
-    cancel_en_passant_vulnerability
-    chessman.take_turn(coords[1], board_obj_dupe)
-    promote_pawn
-    playerw_dupe.update_pieces
-    playerb_dupe.update_pieces
+      chessman = find_chessman(playerw_dupe, playerb_dupe, coords[0])
+      if @color
+        playerw_dupe.cancel_en_passant_vulnerability
+      else
+        playerb_dupe.cancel_en_passant_vulnerability
+      end
+      chessman.take_turn(coords[1], board_obj_dupe)
+      if @color
+        playerw_dupe.promote_pawn(promote_name)
+      else
+        playerb_dupe.promote_pawn(promote_name)
+      end
+      playerw_dupe.update_pieces
+      playerb_dupe.update_pieces
 
-    board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
-    if @color
-      playerb_dupe.is_attacking?(playerw_dupe.king.coord, board_obj_dupe)
-    else
-      playerw_dupe.is_attacking?(playerb_dupe.king.coord, board_obj_dupe)
+      board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
+      arr_check << if @color
+                     playerb_dupe.is_attacking?(playerw_dupe.king.coord, board_obj_dupe)
+                   else
+                     playerw_dupe.is_attacking?(playerb_dupe.king.coord, board_obj_dupe)
+                   end
     end
+    return true if arr_check.all?(true)
+
+    false
   end
 
   def find_chessman(playerw, playerb, coord)
@@ -178,31 +242,42 @@ class Player
     @pieces.each do |piece|
       coord = piece.coord
       targets = piece.generate_move(board_obj) + piece.generate_capture(board_obj)
-
       targets.each do |target|
-        playerw_dupe = Marshal.load(Marshal.dump(playerw))
-        playerb_dupe = Marshal.load(Marshal.dump(playerb))
+        %w[queen bishop knight rook].each do |promote_name|
+          playerw_dupe = Marshal.load(Marshal.dump(playerw))
+          playerb_dupe = Marshal.load(Marshal.dump(playerb))
 
-        board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
+          board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
 
-        chessman = nil
-        playerw_dupe.pieces.each do |piece_dupe|
-          chessman = piece_dupe if piece_dupe.coord == coord
+          chessman = nil
+          playerw_dupe.pieces.each do |piece_dupe|
+            chessman = piece_dupe if piece_dupe.coord == coord
+          end
+          playerb_dupe.pieces.each do |piece_dupe|
+            chessman = piece_dupe if piece_dupe.coord == coord
+          end
+
+          if @color
+            playerw_dupe.cancel_en_passant_vulnerability
+          else
+            playerb_dupe.cancel_en_passant_vulnerability
+          end
+          chessman.take_turn(target, board_obj_dupe)
+          if @color
+            playerw_dupe.promote_pawn(promote_name)
+          else
+            playerb_dupe.promote_pawn(promote_name)
+          end
+          playerw_dupe.update_pieces
+          playerb_dupe.update_pieces
+
+          board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
+          check_arr << if @color
+                         playerb_dupe.is_attacking?(playerw_dupe.king.coord, board_obj_dupe)
+                       else
+                         playerw_dupe.is_attacking?(playerb_dupe.king.coord, board_obj_dupe)
+                       end
         end
-        playerb_dupe.pieces.each do |piece_dupe|
-          chessman = piece_dupe if piece_dupe.coord == coord
-        end
-
-        chessman.take_turn(target, board_obj_dupe)
-        playerw_dupe.update_pieces
-        playerb_dupe.update_pieces
-
-        board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
-        check_arr << if @color
-                       playerb_dupe.is_attacking?(playerw_dupe.king.coord, board_obj_dupe)
-                     else
-                       playerw_dupe.is_attacking?(playerb_dupe.king.coord, board_obj_dupe)
-                     end
       end
     end
     !check_arr.include?(false)

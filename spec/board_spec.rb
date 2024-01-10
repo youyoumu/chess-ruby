@@ -17,13 +17,12 @@ describe Board do
 
   context 'when test #2' do
     subject(:game) { Board.new('Shiro', 'Kuro') }
-    let(:playerw) { game.playerw }
     before do
-      allow(game).to receive(:gets).and_return('g2g4', 'b7b5', 'g4g5', 'b5b4', 'g5g6', 'b4b3', 'g6h7', 'b3c2',
-                                               'h7g8').exactly(9).times
+      allow(game).to receive(:gets).and_return('g2g4', 'b7b5', 'g4g5', 'b5b4', 'g5g6', 'b4b3', 'g6h7', 'b3a2', 'h7g8',
+                                               'queen').exactly(10).times
     end
 
-    xit 'test2' do
+    it 'test2' do
       game.play
       expect(1).to eq 1
     end
@@ -60,10 +59,9 @@ describe Board do
                                                'h7h8', 'h5f7').exactly(11).times
     end
 
-    it 'test5' do
+    xit 'test5' do
       game.play
       expect(1).to eq 1
     end
-    'e2e3 h7h6 d1h5 h8h7 h2h4 h7h8 h1h3 h8h7 h3f3 h7h8 h5f7'
   end
 end

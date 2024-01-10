@@ -29,8 +29,10 @@ class Queen
   end
 
   def generate_move(board_obj)
-    generate_move_up(board_obj) + generate_move_down(board_obj) +
-      generate_move_left(board_obj) + generate_move_right(board_obj) +
+    generate_move_up(board_obj) +
+      generate_move_down(board_obj) +
+      generate_move_left(board_obj) +
+      generate_move_right(board_obj) +
       generate_move_up_left(board_obj) +
       generate_move_up_right(board_obj) +
       generate_move_down_left(board_obj) +
@@ -38,8 +40,10 @@ class Queen
   end
 
   def generate_capture(board_obj)
-    generate_capture_up(board_obj) + generate_capture_down(board_obj) +
-      generate_capture_left(board_obj) + generate_capture_right(board_obj) +
+    generate_capture_up(board_obj) +
+      generate_capture_down(board_obj) +
+      generate_capture_left(board_obj) +
+      generate_capture_right(board_obj) +
       generate_capture_up_left(board_obj) +
       generate_capture_up_right(board_obj) +
       generate_capture_down_left(board_obj) +

@@ -45,7 +45,10 @@ class Bishop
   def generate_move_up_left(board_obj)
     arr = []
     move_coord = @coord
-    while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+    while in_bound?(move_coord) &&
+          (board_obj[move_coord[0]][move_coord[1]].nil? ||
+          board_obj[move_coord[0]][move_coord[1]] === self)
+
       move_coord = [move_coord[0] - 1, move_coord[1] - 1]
       arr << move_coord if in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
     end
@@ -55,7 +58,10 @@ class Bishop
   def generate_move_up_right(board_obj)
     arr = []
     move_coord = @coord
-    while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+    while in_bound?(move_coord) &&
+          (board_obj[move_coord[0]][move_coord[1]].nil? ||
+          board_obj[move_coord[0]][move_coord[1]] === self)
+
       move_coord = [move_coord[0] - 1, move_coord[1] + 1]
       arr << move_coord if in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
     end
@@ -65,7 +71,10 @@ class Bishop
   def generate_move_down_left(board_obj)
     arr = []
     move_coord = @coord
-    while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+    while in_bound?(move_coord) &&
+          (board_obj[move_coord[0]][move_coord[1]].nil? ||
+          board_obj[move_coord[0]][move_coord[1]] === self)
+
       move_coord = [move_coord[0] + 1, move_coord[1] - 1]
       arr << move_coord if in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
     end
@@ -75,7 +84,10 @@ class Bishop
   def generate_move_down_right(board_obj)
     arr = []
     move_coord = @coord
-    while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+    while in_bound?(move_coord) &&
+          (board_obj[move_coord[0]][move_coord[1]].nil? ||
+          board_obj[move_coord[0]][move_coord[1]] === self)
+
       move_coord = [move_coord[0] + 1, move_coord[1] + 1]
       arr << move_coord if in_bound?(move_coord) && board_obj[move_coord[0]][move_coord[1]].nil?
     end
@@ -86,18 +98,28 @@ class Bishop
     arr = []
     move_coord = @coord
     if @color
-      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+      while in_bound?(move_coord) &&
+            (board_obj[move_coord[0]][move_coord[1]].nil? ||
+            board_obj[move_coord[0]][move_coord[1]] === self)
+
         move_coord = [move_coord[0] - 1, move_coord[1] - 1]
-        if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && !board_obj[move_coord[0]][move_coord[1]].color
-          arr << move_coord
-        end
+        next unless in_bound?(move_coord) &&
+                    !board_obj[move_coord[0]][move_coord[1]].nil? &&
+                    !board_obj[move_coord[0]][move_coord[1]].color
+
+        arr << move_coord
       end
     else
-      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+      while in_bound?(move_coord) &&
+            (board_obj[move_coord[0]][move_coord[1]].nil? ||
+            board_obj[move_coord[0]][move_coord[1]] === self)
+
         move_coord = [move_coord[0] - 1, move_coord[1] - 1]
-        if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && board_obj[move_coord[0]][move_coord[1]].color
-          arr << move_coord
-        end
+        next unless in_bound?(move_coord) &&
+                    !board_obj[move_coord[0]][move_coord[1]].nil? &&
+                    board_obj[move_coord[0]][move_coord[1]].color
+
+        arr << move_coord
       end
     end
     arr
@@ -107,18 +129,28 @@ class Bishop
     arr = []
     move_coord = @coord
     if @color
-      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+      while in_bound?(move_coord) &&
+            (board_obj[move_coord[0]][move_coord[1]].nil? ||
+            board_obj[move_coord[0]][move_coord[1]] === self)
+
         move_coord = [move_coord[0] - 1, move_coord[1] + 1]
-        if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && !board_obj[move_coord[0]][move_coord[1]].color
-          arr << move_coord
-        end
+        next unless in_bound?(move_coord) &&
+                    !board_obj[move_coord[0]][move_coord[1]].nil? &&
+                    !board_obj[move_coord[0]][move_coord[1]].color
+
+        arr << move_coord
       end
     else
-      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+      while in_bound?(move_coord) &&
+            (board_obj[move_coord[0]][move_coord[1]].nil? ||
+            board_obj[move_coord[0]][move_coord[1]] === self)
+
         move_coord = [move_coord[0] - 1, move_coord[1] + 1]
-        if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && board_obj[move_coord[0]][move_coord[1]].color
-          arr << move_coord
-        end
+        next unless in_bound?(move_coord) &&
+                    !board_obj[move_coord[0]][move_coord[1]].nil? &&
+                    board_obj[move_coord[0]][move_coord[1]].color
+
+        arr << move_coord
       end
     end
     arr
@@ -128,18 +160,28 @@ class Bishop
     arr = []
     move_coord = @coord
     if @color
-      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+      while in_bound?(move_coord) &&
+            (board_obj[move_coord[0]][move_coord[1]].nil? ||
+            board_obj[move_coord[0]][move_coord[1]] === self)
+
         move_coord = [move_coord[0] + 1, move_coord[1] - 1]
-        if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && !board_obj[move_coord[0]][move_coord[1]].color
-          arr << move_coord
-        end
+        next unless in_bound?(move_coord) &&
+                    !board_obj[move_coord[0]][move_coord[1]].nil? &&
+                    !board_obj[move_coord[0]][move_coord[1]].color
+
+        arr << move_coord
       end
     else
-      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+      while in_bound?(move_coord) &&
+            (board_obj[move_coord[0]][move_coord[1]].nil? ||
+            board_obj[move_coord[0]][move_coord[1]] === self)
+
         move_coord = [move_coord[0] + 1, move_coord[1] - 1]
-        if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && board_obj[move_coord[0]][move_coord[1]].color
-          arr << move_coord
-        end
+        next unless in_bound?(move_coord) &&
+                    !board_obj[move_coord[0]][move_coord[1]].nil? &&
+                    board_obj[move_coord[0]][move_coord[1]].color
+
+        arr << move_coord
       end
     end
     arr
@@ -149,18 +191,28 @@ class Bishop
     arr = []
     move_coord = @coord
     if @color
-      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+      while in_bound?(move_coord) &&
+            (board_obj[move_coord[0]][move_coord[1]].nil? ||
+            board_obj[move_coord[0]][move_coord[1]] === self)
+
         move_coord = [move_coord[0] + 1, move_coord[1] + 1]
-        if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && !board_obj[move_coord[0]][move_coord[1]].color
-          arr << move_coord
-        end
+        next unless in_bound?(move_coord) &&
+                    !board_obj[move_coord[0]][move_coord[1]].nil? &&
+                    !board_obj[move_coord[0]][move_coord[1]].color
+
+        arr << move_coord
       end
     else
-      while in_bound?(move_coord) && (board_obj[move_coord[0]][move_coord[1]].nil? || board_obj[move_coord[0]][move_coord[1]] === self)
+      while in_bound?(move_coord) &&
+            (board_obj[move_coord[0]][move_coord[1]].nil? ||
+            board_obj[move_coord[0]][move_coord[1]] === self)
+
         move_coord = [move_coord[0] + 1, move_coord[1] + 1]
-        if in_bound?(move_coord) && !board_obj[move_coord[0]][move_coord[1]].nil? && board_obj[move_coord[0]][move_coord[1]].color
-          arr << move_coord
-        end
+        next unless in_bound?(move_coord) &&
+                    !board_obj[move_coord[0]][move_coord[1]].nil? &&
+                    board_obj[move_coord[0]][move_coord[1]].color
+
+        arr << move_coord
       end
     end
     arr

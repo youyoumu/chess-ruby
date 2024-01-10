@@ -1,12 +1,15 @@
-require './lib/chessman.rb'
+# frozen_string_literal: true
+
+require './lib/chessman'
 
 class Pawn
   include Chessman
   attr_accessor :coord, :color, :icon, :is_captured, :name, :vulnerable_to_en_passant
+
   def initialize(coord, color)
     @coord = coord
     @color = color
-    @icon = color ? " ♙ " : " ♟︎ "
+    @icon = color ? ' ♙ ' : ' ♟︎ '
     @is_captured = false
     @first_move_available = true
     @name = 'Pawn'
@@ -28,7 +31,7 @@ class Pawn
 
   def en_passant(coord, board_obj)
     @coord = coord
-    @color ? behind = [coord[0] + 2, coord[1]] : behind = [coord[0] - 2, coord[1]]
+    behind = @color ? [coord[0] + 2, coord[1]] : [coord[0] - 2, coord[1]]
     board_obj[behind[0]][behind[1]].captured
   end
 
@@ -50,6 +53,7 @@ class Pawn
     arr_en_passant = generate_en_passant(board_obj)
     arr = arr_move + arr_capture + arr_en_passant
     return true if arr.include?(coord)
+
     false
   end
 
@@ -58,24 +62,25 @@ class Pawn
     if @first_move_available
       if @color
         target = [@coord[0] - 2, @coord[1]]
-        arr << target if board_obj[target[0]][target[1]].nil? && board_obj[target[0]+1][target[1]].nil? && in_bound?(target)
+        if board_obj[target[0]][target[1]].nil? && board_obj[target[0] + 1][target[1]].nil? && in_bound?(target)
+          arr << target
+        end
         target = [@coord[0] - 1, @coord[1]]
-        arr << target if board_obj[target[0]][target[1]].nil? && in_bound?(target)
       else
         target = [@coord[0] + 2, @coord[1]]
-        arr << target if board_obj[target[0]][target[1]].nil? && board_obj[target[0]-1][target[1]].nil? && in_bound?(target)
+        if board_obj[target[0]][target[1]].nil? && board_obj[target[0] - 1][target[1]].nil? && in_bound?(target)
+          arr << target
+        end
         target = [@coord[0] + 1, @coord[1]]
-        arr << target if board_obj[target[0]][target[1]].nil? && in_bound?(target)
       end
     else
-      if @color
-        target = [@coord[0] - 1, @coord[1]]
-        arr << target if board_obj[target[0]][target[1]].nil? && in_bound?(target)
-      else
-        target = [@coord[0] + 1, @coord[1]]
-        arr << target if board_obj[target[0]][target[1]].nil? && in_bound?(target)
-      end
+      target = if @color
+                 [@coord[0] - 1, @coord[1]]
+               else
+                 [@coord[0] + 1, @coord[1]]
+               end
     end
+    arr << target if board_obj[target[0]][target[1]].nil? && in_bound?(target)
     arr
   end
 
@@ -83,14 +88,22 @@ class Pawn
     arr = []
     if @color
       target = [@coord[0] - 1, @coord[1] + 1]
-      arr << target if !board_obj[target[0]][target[1]].nil? && !board_obj[target[0]][target[1]].color && in_bound?(target)
+      if !board_obj[target[0]][target[1]].nil? && !board_obj[target[0]][target[1]].color && in_bound?(target)
+        arr << target
+      end
       target = [@coord[0] - 1, @coord[1] - 1]
-      arr << target if !board_obj[target[0]][target[1]].nil? && !board_obj[target[0]][target[1]].color && in_bound?(target)
+      if !board_obj[target[0]][target[1]].nil? && !board_obj[target[0]][target[1]].color && in_bound?(target)
+        arr << target
+      end
     else
       target = [@coord[0] + 1, @coord[1] + 1]
-      arr << target if !board_obj[target[0]][target[1]].nil? && board_obj[target[0]][target[1]].color && in_bound?(target)
+      if !board_obj[target[0]][target[1]].nil? && board_obj[target[0]][target[1]].color && in_bound?(target)
+        arr << target
+      end
       target = [@coord[0] + 1, @coord[1] - 1]
-      arr << target if !board_obj[target[0]][target[1]].nil? && board_obj[target[0]][target[1]].color && in_bound?(target)
+      if !board_obj[target[0]][target[1]].nil? && board_obj[target[0]][target[1]].color && in_bound?(target)
+        arr << target
+      end
     end
     arr
   end
@@ -101,24 +114,24 @@ class Pawn
       target = [@coord[0] - 1, @coord[1] + 1]
       behind = [@coord[0] + 1, @coord[1] + 1]
       arr << target if in_bound?(target) && board_obj[target[0]][target[1]].nil? &&
-      !board_obj[behind[0]][behind[1]].nil? && board_obj[behind[0]][behind[1]].name == 'Pawn' &&
-      !board_obj[behind[0]][behind[1]].color && board_obj[behind[0]][behind[1]].vulnerable_to_en_passant
+                       !board_obj[behind[0]][behind[1]].nil? && board_obj[behind[0]][behind[1]].name == 'Pawn' &&
+                       !board_obj[behind[0]][behind[1]].color && board_obj[behind[0]][behind[1]].vulnerable_to_en_passant
       target = [@coord[0] - 1, @coord[1] - 1]
       behind = [@coord[0] + 1, @coord[1] - 1]
       arr << target if in_bound?(target) && board_obj[target[0]][target[1]].nil? &&
-      !board_obj[behind[0]][behind[1]].nil? && board_obj[behind[0]][behind[1]].name == 'Pawn' &&
-      !board_obj[behind[0]][behind[1]].color && board_obj[behind[0]][behind[1]].vulnerable_to_en_passant
+                       !board_obj[behind[0]][behind[1]].nil? && board_obj[behind[0]][behind[1]].name == 'Pawn' &&
+                       !board_obj[behind[0]][behind[1]].color && board_obj[behind[0]][behind[1]].vulnerable_to_en_passant
     else
       target = [@coord[0] + 1, @coord[1] + 1]
       behind = [@coord[0] - 1, @coord[1] + 1]
       arr << target if in_bound?(target) && board_obj[target[0]][target[1]].nil? &&
-      !board_obj[behind[0]][behind[1]].nil? && board_obj[behind[0]][behind[1]].name == 'Pawn' &&
-      board_obj[behind[0]][behind[1]].color && board_obj[behind[0]][behind[1]].vulnerable_to_en_passant
+                       !board_obj[behind[0]][behind[1]].nil? && board_obj[behind[0]][behind[1]].name == 'Pawn' &&
+                       board_obj[behind[0]][behind[1]].color && board_obj[behind[0]][behind[1]].vulnerable_to_en_passant
       target = [@coord[0] + 1, @coord[1] - 1]
       behind = [@coord[0] - 1, @coord[1] - 1]
       arr << target if in_bound?(target) && board_obj[target[0]][target[1]].nil? &&
-      !board_obj[behind[0]][behind[1]].nil? && board_obj[behind[0]][behind[1]].name == 'Pawn' &&
-      board_obj[behind[0]][behind[1]].color && board_obj[behind[0]][behind[1]].vulnerable_to_en_passant
+                       !board_obj[behind[0]][behind[1]].nil? && board_obj[behind[0]][behind[1]].name == 'Pawn' &&
+                       board_obj[behind[0]][behind[1]].color && board_obj[behind[0]][behind[1]].vulnerable_to_en_passant
     end
     arr
   end

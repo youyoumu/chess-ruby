@@ -1,17 +1,19 @@
-require "./lib/king.rb"
-require "./lib/queen.rb"
-require "./lib/bishop.rb"
-require "./lib/knight.rb"
-require "./lib/rook.rb"
-require "./lib/pawn.rb"
+# frozen_string_literal: true
+
+require './lib/king'
+require './lib/queen'
+require './lib/bishop'
+require './lib/knight'
+require './lib/rook'
+require './lib/pawn'
 
 class Player
-  attr_accessor :pieces, :name, :color
+  attr_accessor :pieces, :name, :color, :king
 
   def initialize(name, color)
     @name = name
 
-    #false for black, true for white
+    # false for black, true for white
     @color = color
 
     if @color
@@ -51,8 +53,8 @@ class Player
     end
 
     @pieces =
-    [@king, @queen, @bishop1, @bishop2, @knight1, @knight2, @rook1, @rook2, @pawn1, @pawn2, @pawn2, @pawn3,
-    @pawn4, @pawn5, @pawn6, @pawn7, @pawn8]
+      [@king, @queen, @bishop1, @bishop2, @knight1, @knight2, @rook1, @rook2, @pawn1, @pawn2, @pawn2, @pawn3,
+       @pawn4, @pawn5, @pawn6, @pawn7, @pawn8]
 
     @pawns = [@pawn1, @pawn2, @pawn3, @pawn4, @pawn5, @pawn6, @pawn7, @pawn8]
   end
@@ -65,14 +67,14 @@ class Player
 
   def promote_pawn
     if @color
-      @pawn1 = get_new_class(@pawn1.coord) if !@pawn1.is_captured && @pawn1.coord[0] == 0 && @pawn1.name == 'Pawn'
-      @pawn2 = get_new_class(@pawn2.coord) if !@pawn2.is_captured && @pawn2.coord[0] == 0 && @pawn2.name == 'Pawn'
-      @pawn3 = get_new_class(@pawn3.coord) if !@pawn3.is_captured && @pawn3.coord[0] == 0 && @pawn3.name == 'Pawn'
-      @pawn4 = get_new_class(@pawn4.coord) if !@pawn4.is_captured && @pawn4.coord[0] == 0 && @pawn4.name == 'Pawn'
-      @pawn5 = get_new_class(@pawn5.coord) if !@pawn5.is_captured && @pawn5.coord[0] == 0 && @pawn5.name == 'Pawn'
-      @pawn6 = get_new_class(@pawn6.coord) if !@pawn6.is_captured && @pawn6.coord[0] == 0 && @pawn6.name == 'Pawn'
-      @pawn7 = get_new_class(@pawn7.coord) if !@pawn7.is_captured && @pawn7.coord[0] == 0 && @pawn7.name == 'Pawn'
-      @pawn8 = get_new_class(@pawn8.coord) if !@pawn8.is_captured && @pawn8.coord[0] == 0 && @pawn8.name == 'Pawn'
+      @pawn1 = get_new_class(@pawn1.coord) if !@pawn1.is_captured && @pawn1.coord[0].zero? && @pawn1.name == 'Pawn'
+      @pawn2 = get_new_class(@pawn2.coord) if !@pawn2.is_captured && @pawn2.coord[0].zero? && @pawn2.name == 'Pawn'
+      @pawn3 = get_new_class(@pawn3.coord) if !@pawn3.is_captured && @pawn3.coord[0].zero? && @pawn3.name == 'Pawn'
+      @pawn4 = get_new_class(@pawn4.coord) if !@pawn4.is_captured && @pawn4.coord[0].zero? && @pawn4.name == 'Pawn'
+      @pawn5 = get_new_class(@pawn5.coord) if !@pawn5.is_captured && @pawn5.coord[0].zero? && @pawn5.name == 'Pawn'
+      @pawn6 = get_new_class(@pawn6.coord) if !@pawn6.is_captured && @pawn6.coord[0].zero? && @pawn6.name == 'Pawn'
+      @pawn7 = get_new_class(@pawn7.coord) if !@pawn7.is_captured && @pawn7.coord[0].zero? && @pawn7.name == 'Pawn'
+      @pawn8 = get_new_class(@pawn8.coord) if !@pawn8.is_captured && @pawn8.coord[0].zero? && @pawn8.name == 'Pawn'
     else
       @pawn1 = get_new_class(@pawn1.coord) if !@pawn1.is_captured && @pawn1.coord[0] == 7 && @pawn1.name == 'Pawn'
       @pawn2 = get_new_class(@pawn2.coord) if !@pawn2.is_captured && @pawn2.coord[0] == 7 && @pawn2.name == 'Pawn'
@@ -87,8 +89,8 @@ class Player
   end
 
   def update_pawns
-    @pawns = @pawns.reject do |piece|
-      piece.name != 'Pawn'
+    @pawns = @pawns.select do |piece|
+      piece.name == 'Pawn'
     end
   end
 
@@ -98,6 +100,7 @@ class Player
     loop do
       input = gets.chomp.downcase
       break if input_valid?(input)
+
       puts 'Invalid input! Try again:'
     end
     case input
@@ -113,25 +116,22 @@ class Player
   end
 
   def input_valid?(input)
-    valid_input = ['queen', 'bishop', 'knight', 'rook']
+    valid_input = %w[queen bishop knight rook]
     return true if valid_input.include?(input)
+
     false
   end
 
-  def king
-    @king
+  def reassign_pieces
+    @pieces =
+      [@king, @queen, @bishop1, @bishop2, @knight1, @knight2, @rook1, @rook2, @pawn1, @pawn2, @pawn2, @pawn3,
+       @pawn4, @pawn5, @pawn6, @pawn7, @pawn8]
   end
 
   def update_pieces
-    @pieces =
-    [@king, @queen, @bishop1, @bishop2, @knight1, @knight2, @rook1, @rook2, @pawn1, @pawn2, @pawn2, @pawn3,
-    @pawn4, @pawn5, @pawn6, @pawn7, @pawn8]
-    @pieces = @pieces.reject do |piece|
-      piece.is_captured
-    end
-    @pawns = @pawns.reject do |piece|
-      piece.is_captured
-    end
+    reassign_pieces
+    @pieces = @pieces.reject(&:is_captured)
+    @pawns = @pawns.reject(&:is_captured)
   end
 
   def is_attacking?(king_coord, board_obj)
@@ -146,7 +146,6 @@ class Player
     check_arr = []
     @pieces.each do |piece|
       coord = piece.coord
-      targets = []
       targets = piece.generate_move(board_obj) + piece.generate_capture(board_obj)
 
       targets.each do |target|
@@ -168,18 +167,18 @@ class Player
         playerb_dupe.update_pieces
 
         board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
-        if @color
-          check_arr << playerb_dupe.is_attacking?(playerw_dupe.king.coord, board_obj_dupe)
-        else
-          check_arr << playerw_dupe.is_attacking?(playerb_dupe.king.coord, board_obj_dupe)
-        end
+        check_arr << if @color
+                       playerb_dupe.is_attacking?(playerw_dupe.king.coord, board_obj_dupe)
+                     else
+                       playerw_dupe.is_attacking?(playerb_dupe.king.coord, board_obj_dupe)
+                     end
       end
     end
-    return !check_arr.include?(false)
+    !check_arr.include?(false)
   end
 
   def generate_board_obj(playerw, playerb)
-    board_obj = Array.new(8) { Array.new(8, nil)}
+    board_obj = Array.new(8) { Array.new(8, nil) }
     playerw.pieces.each do |piece|
       board_obj[piece.coord[0]][piece.coord[1]] = piece
     end

@@ -1,12 +1,15 @@
-require './lib/chessman.rb'
+# frozen_string_literal: true
+
+require './lib/chessman'
 
 class Knight
   include Chessman
   attr_accessor :coord, :color, :icon, :is_captured, :name
+
   def initialize(coord, color)
     @coord = coord
     @color = color
-    @icon = color ? " ♘ " : " ♞ "
+    @icon = color ? ' ♘ ' : ' ♞ '
     @is_captured = false
     @name = 'Knight'
   end
@@ -48,8 +51,8 @@ class Knight
 
   def generate_capture(board_obj)
     arr = []
+    coord = [@coord[0] - 2, @coord[1] - 1]
     if @color
-      coord = [@coord[0] - 2, @coord[1] - 1]
       arr << coord if in_bound?(coord) && !board_obj[coord[0]][coord[1]].nil? && !board_obj[coord[0]][coord[1]].color
       coord = [@coord[0] - 2, @coord[1] + 1]
       arr << coord if in_bound?(coord) && !board_obj[coord[0]][coord[1]].nil? && !board_obj[coord[0]][coord[1]].color
@@ -66,7 +69,6 @@ class Knight
       coord = [@coord[0] + 1, @coord[1] + 2]
       arr << coord if in_bound?(coord) && !board_obj[coord[0]][coord[1]].nil? && !board_obj[coord[0]][coord[1]].color
     else
-      coord = [@coord[0] - 2, @coord[1] - 1]
       arr << coord if in_bound?(coord) && !board_obj[coord[0]][coord[1]].nil? && board_obj[coord[0]][coord[1]].color
       coord = [@coord[0] - 2, @coord[1] + 1]
       arr << coord if in_bound?(coord) && !board_obj[coord[0]][coord[1]].nil? && board_obj[coord[0]][coord[1]].color

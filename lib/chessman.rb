@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 module Chessman
   def in_bound?(coord)
     return true if coord[0] >= 0 && coord[0] <= 7 && coord[1] >= 0 && coord[1] <= 7
+
     false
   end
 
@@ -14,10 +17,11 @@ module Chessman
     arr_capture = generate_capture(board_obj)
     arr = arr_move + arr_capture
     return true if arr.include?(coord)
+
     false
   end
 
   def inspect
-    "#{@name}"
+    @name.to_s
   end
 end

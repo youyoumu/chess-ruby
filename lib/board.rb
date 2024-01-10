@@ -1,5 +1,7 @@
-require "./lib/string.rb"
-require "./lib/player.rb"
+# frozen_string_literal: true
+
+require './lib/string'
+require './lib/player'
 
 class Board
   attr_accessor :board_obj, :playerw, :playerb
@@ -7,34 +9,30 @@ class Board
   def initialize(name1, name2)
     @playerw = Player.new(name1, true)
     @playerb = Player.new(name2, false)
-    @board = Array.new(8) { Array.new(8, "   ")}
-    @board_obj = Array.new(8) { Array.new(8, nil)}
+    @board = Array.new(8) { Array.new(8, '   ') }
+    @board_obj = Array.new(8) { Array.new(8, nil) }
   end
 
   def draw_board
     update_board
-    puts "    A  B  C  D  E  F  G  H "
+    puts '    A  B  C  D  E  F  G  H '
     counter = 8
     @board.each_with_index do |row, i|
+      arr = [" #{counter} "]
       if i.even?
-        arr = [" #{counter} "]
         row.each_with_index do |square, j|
-          j.even? ? arr << square.light : arr << square.dark
+          arr << (j.even? ? square.light : square.dark)
         end
-        arr << " #{counter} "
-        puts arr.join('')
-        counter -= 1
       else
-        arr = [" #{counter} "]
         row.each_with_index do |square, j|
-          j.even? ? arr << square.dark : arr << square.light
+          arr << (j.even? ? square.dark : square.light)
         end
-        arr << " #{counter} "
-        puts arr.join('')
-        counter -= 1
       end
+      arr << " #{counter} "
+      puts arr.join('')
+      counter -= 1
     end
-    puts "    A  B  C  D  E  F  G  H "
+    puts '    A  B  C  D  E  F  G  H '
   end
 
   def play
@@ -74,13 +72,15 @@ class Board
         puts "#{@playerw.name}'s turn:"
         input = gets.chomp
         break if input_valid?(input)
-        puts "Wrong format! Try again:"
+
+        puts 'Wrong format! Try again:'
       end
       coords = translate(input)
       chessman = find_chessman(coords[0])
       break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && chessman.color
+
       if chessman.nil?
-        puts "You selected empty square! Try again:"
+        puts 'You selected empty square! Try again:'
       elsif !chessman.color
         puts "That chessman is not your's! Try again:"
       else
@@ -101,13 +101,15 @@ class Board
         puts "#{@playerb.name}'s turn:"
         input = gets.chomp
         break if input_valid?(input)
-        puts "Wrong format! Try again:"
+
+        puts 'Wrong format! Try again:'
       end
       coords = translate(input)
       chessman = find_chessman(coords[0])
       break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && !chessman.color
+
       if chessman.nil?
-        puts "You selected empty square! Try again:"
+        puts 'You selected empty square! Try again:'
       elsif chessman.color
         puts "That chessman is not your's! Try again:"
       else
@@ -137,7 +139,7 @@ class Board
   end
 
   def update_board
-    @board = Array.new(8) { Array.new(8, "   ")}
+    @board = Array.new(8) { Array.new(8, '   ') }
     @playerw.pieces.each do |piece|
       @board[piece.coord[0]][piece.coord[1]] = piece.icon
     end
@@ -147,7 +149,7 @@ class Board
   end
 
   def update_board_obj
-    @board_obj = Array.new(8) { Array.new(8, nil)}
+    @board_obj = Array.new(8) { Array.new(8, nil) }
     @playerw.pieces.each do |piece|
       @board_obj[piece.coord[0]][piece.coord[1]] = piece
     end
@@ -165,21 +167,21 @@ class Board
     start = [row_start, column_start]
     target = [row_target, column_target]
 
-    [start,target]
+    [start, target]
   end
 
   def input_valid?(str_input)
     valid_int = [1, 2, 3, 4, 5, 6, 7, 8]
-    valid_letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-    unless (
-      str_input.length == 4 &&
-      valid_int.include?(str_input[1].to_i) &&
-      valid_int.include?(str_input[3].to_i) &&
-      valid_letter.include?(str_input[0].downcase) &&
-      valid_letter.include?(str_input[2].downcase)
-    )
+    valid_letter = %w[a b c d e f g h]
+    unless str_input.length == 4 &&
+           valid_int.include?(str_input[1].to_i) &&
+           valid_int.include?(str_input[3].to_i) &&
+           valid_letter.include?(str_input[0].downcase) &&
+           valid_letter.include?(str_input[2].downcase)
+
       return false
     end
+
     true
   end
 end

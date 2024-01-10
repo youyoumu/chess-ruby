@@ -142,6 +142,37 @@ class Player
     false
   end
 
+  def suicide?(playerw, playerb, _board_obj, coords)
+    playerw_dupe = Marshal.load(Marshal.dump(playerw))
+    playerb_dupe = Marshal.load(Marshal.dump(playerb))
+    board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
+
+    chessman = find_chessman(playerw_dupe, playerb_dupe, coords[0])
+    cancel_en_passant_vulnerability
+    chessman.take_turn(coords[1], board_obj_dupe)
+    promote_pawn
+    playerw_dupe.update_pieces
+    playerb_dupe.update_pieces
+
+    board_obj_dupe = generate_board_obj(playerw_dupe, playerb_dupe)
+    if @color
+      playerb_dupe.is_attacking?(playerw_dupe.king.coord, board_obj_dupe)
+    else
+      playerw_dupe.is_attacking?(playerb_dupe.king.coord, board_obj_dupe)
+    end
+  end
+
+  def find_chessman(playerw, playerb, coord)
+    chessman = nil
+    playerw.pieces.each do |piece|
+      chessman = piece if piece.coord == coord
+    end
+    playerb.pieces.each do |piece|
+      chessman = piece if piece.coord == coord
+    end
+    chessman
+  end
+
   def checkmate?(playerw, playerb, board_obj)
     check_arr = []
     @pieces.each do |piece|

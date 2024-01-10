@@ -77,14 +77,17 @@ class Board
       end
       coords = translate(input)
       chessman = find_chessman(coords[0])
-      break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && chessman.color
+      break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && chessman.color &&
+               !playerw.suicide?(@playerw, @playerb, @board_obj, coords)
 
       if chessman.nil?
         puts 'You selected empty square! Try again:'
       elsif !chessman.color
         puts "That chessman is not your's! Try again:"
-      else
+      elsif !chessman.coord_valid?(coords[1], @board_obj)
         puts "That #{chessman.name} can't get to that location! Try again:"
+      else
+        puts "That's a suicide! Try again:"
       end
     end
     @playerw.cancel_en_passant_vulnerability
@@ -106,14 +109,17 @@ class Board
       end
       coords = translate(input)
       chessman = find_chessman(coords[0])
-      break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && !chessman.color
+      break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && !chessman.color &&
+               !playerb.suicide?(@playerw, @playerb, @board_obj, coords)
 
       if chessman.nil?
         puts 'You selected empty square! Try again:'
       elsif chessman.color
         puts "That chessman is not your's! Try again:"
-      else
+      elsif !chessman.coord_valid?(coords[1], @board_obj)
         puts "That #{chessman.name} can't get to that location! Try again:"
+      else
+        puts "That's a suicide! Try again:"
       end
     end
     @playerb.cancel_en_passant_vulnerability

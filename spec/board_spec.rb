@@ -40,4 +40,30 @@ describe Board do
       expect(1).to eq 1
     end
   end
+
+  context 'when test #4' do
+    subject(:game) { Board.new('Shiro', 'Kuro') }
+    before do
+      allow(game).to receive(:gets).and_return('e2e3', 'h7h6', 'd1h5', 'f7f6').exactly(4).times
+    end
+
+    xit 'test4' do
+      game.play
+      expect(1).to eq 1
+    end
+  end
+
+  context 'when test #5' do
+    subject(:game) { Board.new('Shiro', 'Kuro') }
+    before do
+      allow(game).to receive(:gets).and_return('e2e3', 'h7h6', 'd1h5', 'h8h7', 'h2h4', 'h7h8', 'h1h3', 'h8h7', 'h3f3',
+                                               'h7h8', 'h5f7').exactly(11).times
+    end
+
+    it 'test5' do
+      game.play
+      expect(1).to eq 1
+    end
+    'e2e3 h7h6 d1h5 h8h7 h2h4 h7h8 h1h3 h8h7 h3f3 h7h8 h5f7'
+  end
 end

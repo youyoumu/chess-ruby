@@ -87,6 +87,7 @@ class Board
         puts "That #{chessman.name} can't get to that location! Try again:"
       end
     end
+    @playerw.cancel_en_passant_vulnerability
     chessman.take_turn(coords[1], @board_obj)
   end
 
@@ -112,6 +113,7 @@ class Board
         puts "That #{chessman.name} can't get to that location! Try again:"
       end
     end
+    @playerb.cancel_en_passant_vulnerability
     chessman.take_turn(coords[1], @board_obj)
   end
 

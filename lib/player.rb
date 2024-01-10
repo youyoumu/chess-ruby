@@ -54,6 +54,13 @@ class Player
     [@king, @queen, @bishop1, @bishop2, @knight1, @knight2, @rook1, @rook2, @pawn1, @pawn2, @pawn2, @pawn3,
     @pawn4, @pawn5, @pawn6, @pawn7, @pawn8]
 
+    @pawns = [@pawn1, @pawn2, @pawn3, @pawn4, @pawn5, @pawn6, @pawn7, @pawn8]
+  end
+
+  def cancel_en_passant_vulnerability
+    @pawns.each do |pawn|
+      pawn.vulnerable_to_en_passant = false
+    end
   end
 
   def king

@@ -22,7 +22,7 @@ describe Board do
                                                'queen').exactly(10).times
     end
 
-    it 'test2' do
+    xit 'test2' do
       game.play
       expect(1).to eq 1
     end
@@ -60,6 +60,18 @@ describe Board do
     end
 
     xit 'test5' do
+      game.play
+      expect(1).to eq 1
+    end
+  end
+
+  context 'when test #6' do
+    subject(:game) { Board.new('Shiro', 'Kuro') }
+    before do
+      allow(game).to receive(:gets).and_return('g1h3', 'g8h6', 'g2g3', 'g7g6', 'f1g2', 'f8g7', 'e1g1').exactly(7).times
+    end
+
+    it 'test6' do
       game.play
       expect(1).to eq 1
     end

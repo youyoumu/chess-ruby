@@ -4,7 +4,7 @@ require './lib/chessman'
 
 class Rook
   include Chessman
-  attr_accessor :coord, :color, :icon, :is_captured, :name
+  attr_accessor :coord, :color, :icon, :is_captured, :name, :first_move_available
 
   def initialize(coord, color)
     @coord = coord
@@ -12,13 +12,16 @@ class Rook
     @icon = color ? ' ♖ ' : ' ♜ '
     @is_captured = false
     @name = 'Rook'
+    @first_move_available = true
   end
 
   def move(coord)
+    @first_move_available = false
     @coord = coord
   end
 
   def capture(coord, board_obj)
+    @first_move_available = false
     board_obj[coord[0]][coord[1]].captured
     @coord = coord
   end

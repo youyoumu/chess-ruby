@@ -67,6 +67,7 @@ class Board
     input = nil
     coords = nil
     chessman = nil
+    @playerw.set_castling(@playerw, @playerb, @board_obj)
     loop do
       loop do
         puts "#{@playerw.name}'s turn:"
@@ -78,7 +79,7 @@ class Board
       coords = translate(input)
       chessman = find_chessman(coords[0])
       break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && chessman.color &&
-               !playerw.suicide?(@playerw, @playerb, @board_obj, coords)
+               !playerw.suicide?(@playerw, @playerb, coords)
 
       if chessman.nil?
         puts 'You selected empty square! Try again:'
@@ -90,6 +91,7 @@ class Board
         puts "That's a suicide! Try again:"
       end
     end
+
     @playerw.cancel_en_passant_vulnerability
     chessman.take_turn(coords[1], @board_obj)
     @playerw.promote_pawn
@@ -99,6 +101,7 @@ class Board
     input = nil
     coords = nil
     chessman = nil
+    @playerb.set_castling(@playerw, @playerb, @board_obj)
     loop do
       loop do
         puts "#{@playerb.name}'s turn:"
@@ -110,7 +113,7 @@ class Board
       coords = translate(input)
       chessman = find_chessman(coords[0])
       break if !chessman.nil? && chessman.coord_valid?(coords[1], @board_obj) && !chessman.color &&
-               !playerb.suicide?(@playerw, @playerb, @board_obj, coords)
+               !playerb.suicide?(@playerw, @playerb, coords)
 
       if chessman.nil?
         puts 'You selected empty square! Try again:'
@@ -122,6 +125,7 @@ class Board
         puts "That's a suicide! Try again:"
       end
     end
+
     @playerb.cancel_en_passant_vulnerability
     chessman.take_turn(coords[1], @board_obj)
     @playerb.promote_pawn

@@ -293,10 +293,17 @@ class Player
   end
 
   def checkmate?(playerw, playerb, board_obj)
+    playerw.set_castling(playerw, playerb, board_obj)
+    playerb.set_castling(playerw, playerb, board_obj)
     check_arr = []
     @pieces.each do |piece|
       coord = piece.coord
       targets = piece.generate_move(board_obj) + piece.generate_capture(board_obj)
+      if piece.name == 'Pawn'
+        targets += piece.generate_en_passant(board_obj)
+      elsif piece.name == 'King'
+        targets += piece.arr_castling
+      end
       targets.each do |target|
         %w[queen bishop knight rook].each do |promote_name|
           playerw_dupe = Marshal.load(Marshal.dump(playerw))

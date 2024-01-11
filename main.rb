@@ -20,7 +20,6 @@ Example: 'e1g1', 'e8c8'
 3. At any time, Player can save the game by typing 'save'.
 
 
-g2g3 b8a6 f1h3 c7c6 g1f3 d8b6 e1g1 d7d6 e2e4 c8h3 e4e5 e8c8 e5e6 h7h5 e6f7 h8h7 f7g8
 TITLE
 
 puts <<-START

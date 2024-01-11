@@ -11,6 +11,7 @@ class Board
     @playerb = Player.new(name2, false)
     @board = Array.new(8) { Array.new(8, '   ') }
     @board_obj = Array.new(8) { Array.new(8, nil) }
+    @black_first = false
   end
 
   def draw_board
@@ -36,10 +37,17 @@ class Board
   end
 
   def play
+    update
+    play_black_first if @black_first
     draw_board
+    if playerw.checkmate?(@playerw, @playerb, @board_obj)
+      puts "Check mate! #{@playerb.name} wins!"
+      return
+    end
+    announch_check
     loop do
       update
-      take_turnw
+      return 'save' if take_turnw == 'save'
       update
       draw_board
       if playerb.checkmate?(@playerw, @playerb, @board_obj)
@@ -47,7 +55,10 @@ class Board
         return
       end
       announch_check
-      take_turnb
+      if take_turnb == 'save'
+        @black_first = true
+        return 'save'
+      end
       update
       draw_board
       if playerw.checkmate?(@playerw, @playerb, @board_obj)
@@ -56,6 +67,21 @@ class Board
       end
       announch_check
     end
+  end
+
+  def play_black_first
+    @black_first = false
+    draw_board
+      if playerb.checkmate?(@playerw, @playerb, @board_obj)
+        puts "Check mate! #{@playerw.name} wins!"
+        return
+      end
+      announch_check
+      if take_turnb == 'save'
+        @black_first = true
+        return 'save'
+      end
+      update
   end
 
   def announch_check
@@ -72,6 +98,7 @@ class Board
       loop do
         puts "#{@playerw.name}'s turn:"
         input = gets.chomp
+        return 'save' if input.downcase == 'save'
         break if input_valid?(input)
 
         puts 'Wrong format! Try again:'
@@ -106,6 +133,7 @@ class Board
       loop do
         puts "#{@playerb.name}'s turn:"
         input = gets.chomp
+        return 'save' if input.downcase == 'save'
         break if input_valid?(input)
 
         puts 'Wrong format! Try again:'

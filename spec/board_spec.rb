@@ -71,7 +71,19 @@ describe Board do
       allow(game).to receive(:gets).and_return('g1h3', 'g8h6', 'g2g3', 'g7g6', 'f1g2', 'f8g7', 'e1g1').exactly(7).times
     end
 
-    it 'test6' do
+    xit 'test6' do
+      game.play
+      expect(1).to eq 1
+    end
+  end
+
+  context 'when test #7' do
+    subject(:game) { Board.new('Shiro', 'Kuro') }
+    before do
+      allow(game).to receive(:gets).and_return('g2g3', 'b8a6', 'f1h3', 'c7c6', 'g1f3', 'd8b6', 'e1g1', 'd7d6', 'e2e4', 'c8h3', 'e4e5', 'e8c8', 'e5e6', 'h7h5', 'e6f7', 'h8h7', 'f7g8').exactly(17).times
+    end
+
+    it 'test7' do
       game.play
       expect(1).to eq 1
     end

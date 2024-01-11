@@ -85,7 +85,7 @@ class Player
       coord3 = [@king.coord[0], @king.coord[1] - 3]
       if board_obj[coord1[0]][coord1[1]].nil? &&
         board_obj[coord2[0]][coord2[1]].nil? &&
-        board_obj[coord3[0]][coord3[1]].nil?
+        board_obj[coord3[0]][coord3[1]].nil? &&
         @king.first_move_available &&
         @rook1.first_move_available &&
         !playerb.is_attacking?(@king.coord, board_obj) &&
@@ -109,7 +109,7 @@ class Player
       coord3 = [@king.coord[0], @king.coord[1] - 3]
       if board_obj[coord1[0]][coord1[1]].nil? &&
         board_obj[coord2[0]][coord2[1]].nil? &&
-        board_obj[coord3[0]][coord3[1]].nil?
+        board_obj[coord3[0]][coord3[1]].nil? &&
         @king.first_move_available &&
         @rook2.first_move_available &&
         !playerw.is_attacking?(@king.coord, board_obj) &&

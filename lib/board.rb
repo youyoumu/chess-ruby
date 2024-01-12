@@ -48,6 +48,7 @@ class Board
     loop do
       update
       return 'save' if take_turnw == 'save'
+
       update
       draw_board
       if playerb.checkmate?(@playerw, @playerb, @board_obj)
@@ -72,16 +73,16 @@ class Board
   def play_black_first
     @black_first = false
     draw_board
-      if playerb.checkmate?(@playerw, @playerb, @board_obj)
-        puts "Check mate! #{@playerw.name} wins!"
-        return
-      end
-      announch_check
-      if take_turnb == 'save'
-        @black_first = true
-        return 'save'
-      end
-      update
+    if playerb.checkmate?(@playerw, @playerb, @board_obj)
+      puts "Check mate! #{@playerw.name} wins!"
+      return
+    end
+    announch_check
+    if take_turnb == 'save'
+      @black_first = true
+      return 'save'
+    end
+    update
   end
 
   def announch_check

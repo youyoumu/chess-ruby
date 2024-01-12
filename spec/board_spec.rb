@@ -80,7 +80,8 @@ describe Board do
   context 'when test #7' do
     subject(:game) { Board.new('Shiro', 'Kuro') }
     before do
-      allow(game).to receive(:gets).and_return('g2g3', 'b8a6', 'f1h3', 'c7c6', 'g1f3', 'd8b6', 'e1g1', 'd7d6', 'e2e4', 'c8h3', 'e4e5', 'e8c8', 'e5e6', 'h7h5', 'e6f7', 'h8h7', 'f7g8').exactly(17).times
+      allow(game).to receive(:gets).and_return('g2g3', 'b8a6', 'f1h3', 'c7c6', 'g1f3', 'd8b6', 'e1g1', 'd7d6', 'e2e4',
+                                               'c8h3', 'e4e5', 'e8c8', 'e5e6', 'h7h5', 'e6f7', 'h8h7', 'f7g8').exactly(17).times
     end
 
     it 'test7' do

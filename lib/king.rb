@@ -43,12 +43,10 @@ class King
       else
         board_obj[7][0].coord = [7, 3]
       end
+    elsif @coord[1] == 6
+      board_obj[0][7].coord = [0, 5]
     else
-      if @coord[1] == 6
-        board_obj[0][7].coord = [0, 5]
-      else
-        board_obj[0][0].coord = [0, 3]
-      end
+      board_obj[0][0].coord = [0, 3]
     end
   end
 

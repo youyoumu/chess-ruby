@@ -15,7 +15,7 @@ Command Line Interface (CLI) Implementation of Classic Chess Game using Ruby
 - [to do] Support algebraic notation
 
 ## How to play
-### [![Run on Replit](https://replit.com/badge)](https://replit.com/@youyoumu/chess-ruby?v=1)
+### [![Run on Replit](https://replit.com/badge)](https://replit.com/@youyoumu/chess-ruby)
 
 or
 
